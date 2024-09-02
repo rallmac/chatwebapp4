@@ -63,7 +63,7 @@ def delete(id:int):
         return f"ERROR:{e}"
     
 
-# Edit an itemtobi
+# Edit an item
 @app.route("/edit/<int:id>", methods=["GET","POST"])
 def edit(id:int):
     task = MyTask.query.get_or_404(id)
@@ -76,7 +76,21 @@ def edit(id:int):
             return f"Error:{e}"
     else:
         return render_template('edit.html',task=task)
+    
 
+# The chat interface
+@app.route("/chat/<int:id>", methods=["GET","POST"])
+def chat(id:int):
+    task = MyTask.query.get_or_404(id)
+    if request.method == "POST":
+        task.content = request.form['content']
+        try:
+            db.session.commit()
+            return redirect("/")
+        except Exception as e:
+            return f"Error:{e}"
+    else:
+        return render_template('chat.html', task=task)
 
 
 # Runner and Debugger
