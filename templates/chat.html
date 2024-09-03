@@ -14,8 +14,13 @@
         <ul id="messages"></ul>
     </div>
 
+    <label for="message">Type your message here</label>
     <input id="message" autocomplete="off">
     <button onclick="sendMessage()">Send</button>
+
+    <div>
+        <a href="http://localhost:5000/logout"><button>Logout</button></a>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="{{ url_for('static', filename='/js/chat.js') }}"></script>
