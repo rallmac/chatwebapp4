@@ -3,26 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+            socket.on('connect', () => {
+                socket.emit('join', {room: 'default'});
+            });
+
+            socket.on('message', (msg) => {
+                const messages = document.getElementById('messages');
+                const message = document.createElement('li');
+                message.textContent = msg;
+                messages.appendChild(message);
+            });
+
+            document.getElementById('send').onclick = () => {
+                const msg = document.getElementById('message').value;
+                socket.emit('message', {room: 'default', message: msg});
+                document.getElementById('message').value = '';
+            };
+        });
+    </script>
 </head>
 <body>
-    <h2>Chat Room</h2>
-    <input id="username" placeholder="Enter your username">
-    <button onclick="setUsername()">Set Username</button>
-
-    <div id="chat">
+    <header>
+        <h1>Welcome to the Chat Page</h1>
+        <nav>
+            <a href="{{ url_for('auth.logout') }}" class="button">Logout</a>
+            <a href="{{ url_for('auth.edit_profile') }}" class="button">Edit Profile</a>
+            <a href="{{ url_for('auth.view_users') }}" class="button">View Users</a>
+            <form action="{{ url_for('auth.search') }}" method="GET" class="search-form">
+                <input type="text" name="query" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </nav>
+    </header>
+    <section>
         <ul id="messages"></ul>
-    </div>
-
-    <label for="message">Type your message here</label>
-    <input id="message" autocomplete="off">
-    <button onclick="sendMessage()">Send</button>
-
-    <div>
-        <a href="http://localhost:5000/logout"><button>Logout</button></a>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script src="{{ url_for('static', filename='/js/chat.js') }}"></script>
+        <input id="message" type="text" placeholder="Enter your message">
+        <button id="send">Send</button>
+    </section>
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
 </body>
 </html>
