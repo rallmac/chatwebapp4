@@ -8,6 +8,7 @@ from socketio_instance import socketio  # Import from socketio_instance.py
 from routes.auth_routes import auth_bp
 from routes.chat_routes import chat_bp
 from flask_scss import Scss
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = b'\xe0\x16t\xd2\xa5\x14\xfaR[\x19\x96\x07\x9c\x0c\x97_g\xd2\xc8\x11Q\t]\xc6'
@@ -20,6 +21,9 @@ app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'tobijahekprikpe@gmail.com'
 app.config['MAIL_PASSWORD'] = 'mynameisyourname'
+
+# Upload folder configuration
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'static/profile_pics')
 
 db.init_app(app)
 

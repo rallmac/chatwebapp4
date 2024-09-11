@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+import os
+from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Mail
@@ -14,12 +16,16 @@ s = URLSafeTimedSerializer(b'\xe0\x16t\xd2\xa5\x14\xfaR[\x19\x96\x07\x9c\x0c\x97
 # Initialize Flask-Mail
 mail = Mail()
 
-# Home page
+# Allowed extensions for profile pictures
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 @auth_bp.route('/')
 def home():
     return render_template('index.html')
 
-# Chat page
 @auth_bp.route('/chat')
 @login_required
 def chat():
@@ -84,12 +90,19 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
+        phone_number = request.form['phone_number']
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            flash('Username already exists. Please choose another.', 'danger')
+            return redirect(url_for('auth.register'))
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-        new_user = User(username=username, password=hashed_password)
+        new_user = User(username=username, password=hashed_password, email=email, phone_number=phone_number)
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user)
-        return redirect(url_for('auth.chat'))
+        flash('Registration successful! Please log in.', 'success')
+        return redirect(url_for('auth.login'))
     return render_template('register.html')
 
 @auth_bp.route('/logout')
@@ -110,6 +123,35 @@ def edit_profile():
         db.session.commit()
         flash('Profile updated successfully.', 'success')
         return redirect(url_for('auth.chat'))
+    return render_template('edit_profile.html', user=current_user)
+
+@auth_bp.route('/update_profile', methods=['GET', 'POST'])
+@login_required
+def update_profile():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        phone_number = request.form['phone_number']
+        
+
+        current_user.username = username
+        current_user.email = email
+        current_user.phone_number = phone_number
+        
+        # Handle profile picture upload
+        if 'profile_picture' in request.files:
+            file = request.files['profile_picture']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+                current_user.profile_picture = filename
+        
+        db.session.commit()
+        
+        flash('Profile updated successfully.', 'success')
+        return redirect(url_for('auth.chat'))
+    
     return render_template('edit_profile.html', user=current_user)
 
 @auth_bp.route('/delete_account', methods=['POST'])

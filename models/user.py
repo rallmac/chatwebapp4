@@ -1,13 +1,15 @@
 from . import db
 from flask_login import UserMixin
 
-
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=True)
+    phone_number = db.Column(db.String(20), nullable=True)
+    profile_picture = db.Column(db.String(150), nullable=True)
     
     # Relationships
     messages_sent = db.relationship('Message', foreign_keys='Message.sender_id', backref='sender', lazy=True)

@@ -4,25 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Edit Profile</h1>
-    </header>
-    <section>
-        <form method="POST" action="{{ url_for('auth.edit_profile') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="{{ user.username }}" required>
-            <!-- Add other profile fields as needed -->
-            <button type="submit">Update Profile</button>
-        </form>
-        <form method="POST" action="{{ url_for('auth.delete_account') }}">
-            <button type="submit" class="delete-button">Delete Account</button>
-        </form>
-    </section>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
+    <h2>Edit Profile</h2>
+    <form method="POST" action="{{ url_for('auth.update_profile') }}" enctype="multipart/form-data">
+        <input type="text" name="username" placeholder="Username" value="{{ current_user.username }}" required><br>
+        <input type="text" name="email" placeholder="Email" value="{{ current_user.email }}"><br>
+        <input type="number" name="phone_number" placeholder="Phone Number" value="{{ current_user.phone_number }}"><br>
+        <input type="file" name="profile_picture"><br>
+        {% if current_user.profile_picture %}
+            <img src="{{ url_for('static', filename='profile_pics/' ~ current_user.profile_picture) }}" alt="Profile Picture" width="150"><br>
+        {% endif %}
+        <button type="submit">Update Profile</button>
+    </form>
 </body>
 </html>

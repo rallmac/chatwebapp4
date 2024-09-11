@@ -8,10 +8,23 @@
 <body>
     <h2>Register</h2>
     <form method="POST" action="{{ url_for('auth.register') }}">
+        <!-- Username field -->
         <input type="text" name="username" placeholder="Username" required><br>
+        
+        <!-- Password field -->
         <input type="password" name="password" placeholder="Password" required><br>
+        
+        <!-- Email field -->
+        <input type="text" name="email" placeholder="Email" required><br>
+        
+        <!-- Phone number field -->
+        <input type="number" name="phone_number" placeholder="Phone Number" required><br>
+        
+        <!-- Submit button -->
         <button type="submit">Register</button>
     </form>
+    
+    <!-- Link to login page -->
     <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
 </body>
 </html>
