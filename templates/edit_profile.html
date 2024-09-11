@@ -11,11 +11,14 @@
         <h1>Edit Profile</h1>
     </header>
     <section>
-        <form method="POST">
+        <form method="POST" action="{{ url_for('auth.edit_profile') }}">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value="{{ user.username }}" required>
             <!-- Add other profile fields as needed -->
             <button type="submit">Update Profile</button>
+        </form>
+        <form method="POST" action="{{ url_for('auth.delete_account') }}">
+            <button type="submit" class="delete-button">Delete Account</button>
         </form>
     </section>
     <footer>

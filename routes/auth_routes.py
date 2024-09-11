@@ -112,6 +112,21 @@ def edit_profile():
         return redirect(url_for('auth.chat'))
     return render_template('edit_profile.html', user=current_user)
 
+@auth_bp.route('/delete_account', methods=['POST'])
+@login_required
+def delete_account():
+    user_id = current_user.id
+    user = User.query.get(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        flash('Your account has been deleted.', 'success')
+        logout_user()
+        return redirect(url_for('auth.home'))
+    else:
+        flash('Account deletion failed. User not found.', 'danger')
+        return redirect(url_for('auth.edit_profile'))
+
 @auth_bp.route('/view_users')
 @login_required
 def view_users():
