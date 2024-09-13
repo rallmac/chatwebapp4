@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="{{url_for("static", filename="css/styles.css")}}" />
-		{% block head%}{% endblock %}
-	</head>
-	<body>
-		{% block body %}{% endblock %}
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
+        {% block head %}
+        {% endblock %}
+        <title>My Web App</title> <!-- Add a title element here -->
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('auth.home') }}">Home</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('auth.view_users') }}">Find Friends</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">Find Friends</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('auth.edit_profile') }}">Edit Profile</a></li>
+                {% endif %}
+            </ul>
+            <form class="search-bar" action="{{ url_for('chat.search_user') }}" method="POST">
+                <input type="text" name="username" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </nav>
+        <div class="page-container">
+            {% block body %}
+            {% endblock %}
+        </div>
+        <footer>
+            <p>chatwebapp &copy; 2024. All rights reserved.</p>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    </body>
 </html>

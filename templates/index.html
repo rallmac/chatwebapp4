@@ -1,25 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h2>Home</h2>
-    <form action="{{ url_for('chat.search_user') }}" method="POST">
-        <input type="text" name="username" placeholder="Enter username to chat">
-        <button type="submit">Search</button>
-    </form>
-    
-    <div>
-        <a href="{{ url_for('auth.logout') }}"><button>Logout</button></a>
-        <a href="{{ url_for('auth.view_users') }}"><button>Find friends</button></a>
-        <a href="{{ url_for('auth.login') }}"><button>Login</button></a>
-        <a href="{{ url_for('auth.register') }}"><button>Register</button></a>
-    </div>
+{% extends "base.html" %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    
-</body>
-</html>
+{% block head %}
+    <title>Home</title>
+{% endblock %}
+
+{% block body %}
+<h1 class="text-content">Welcome to chatwebapp</h1>
+<section class="home-content">
+    <div class="content-block">
+        <img src="{{ url_for('static', filename='images/friends.jpg') }}" alt="Friends">
+        <div class="text-content">
+            <h2>Stay Connected with Friends and Loved Ones</h2>
+            <p>Rediscover the joy of meaningful conversations. Whether it's a quick chat or a heart-to-heart, stay in touch with those who matter most, no matter the distance.</p>
+        </div>
+    </div>
+    <div class="content-block">
+        <img src="{{ url_for('static', filename='images/global.jpg') }}" alt="Global Connections">
+        <div class="text-content">
+            <h2>Bridge Distances, Build Friendships Across the Globe</h2>
+            <p>Expand your circle beyond borders. Make connections with people from different cultures and backgrounds, bringing the world closer to you, one conversation at a time.</p>
+        </div>
+    </div>
+    <div class="content-block">
+        <img src="{{ url_for('static', filename='images/share.jpg') }}" alt="Share Memories">
+        <div class="text-content">
+            <h2>Share Files, Share Memories – Effortlessly</h2>
+            <p>From cherished photos to important documents, exchange what matters with ease. Share memories that last a lifetime, and experiences that spark joy, all in a few clicks.</p>
+        </div>
+    </div>
+    <div class="content-block">
+        <img src="{{ url_for('static', filename='images/community.jpg') }}" alt="Global Community">
+        <div class="text-content">
+            <h2>Spread the Love, Create a Global Community</h2>
+            <p>More than just a platform—be part of a movement to foster love and connection. Grow your bonds, celebrate life’s moments, and embrace the beauty of togetherness.</p>
+        </div>
+    </div>
+    <div class="cta-button">
+        <a href="{{ url_for('auth.register') }}">Get Started</a>
+    </div>
+</section>
+{% endblock %}

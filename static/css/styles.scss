@@ -1,19 +1,34 @@
 // Color Variables
-$primary_color: #007bff;
+$primary_color: #071422;
 $primary-hover-color: #0056b3;
 $success-color: #28a745;
 $success-hover-color: #218838;
 $title-color: #333;
-$bg_color: wheat;
+$bg_color: #caffca;
 
+// Global Styles
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, #5fff94, #feb47b, #61daff, #d0e9f4);
+    background-color: $bg_color; // Set background color to deep green
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
+// Page Container Styles
+.page-container {
+    flex: 1; // Allow this container to grow and take up remaining space
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Center the content vertically
+    align-items: center; // Center the content horizontally
+    padding: 20px;
+}
+
+// Header Styles
 header {
     background-color: #333;
     background: linear-gradient(45deg, #0e2c18, #feb47b, #0a333f, #d0e9f4);
@@ -25,12 +40,109 @@ header {
         font-size: 2.5em;
     }
 
-    p {
-        margin: 10px 0;
-        font-size: 1.2em;
+    nav {
+        margin-top: 10px;
+
+        a.button {
+            color: #fff;
+            background-color: $primary_color;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $primary-hover-color;
+            }
+        }
+
+        .search-form {
+            display: inline-block;
+            margin-left: 10px;
+
+            input {
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                padding: 5px 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: $primary_color;
+                color: #fff;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: $primary-hover-color;
+                }
+            }
+        }
     }
 }
 
+// Navigation Bar Styles
+nav {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        list-style-type: none; /* Remove dots from links */
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        li {
+            margin: 0 10px;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 15px;
+                display: block;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: $primary-hover-color;
+                }
+            }
+        }
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+
+        input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: $primary_color;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $primary-hover-color;
+            }
+        }
+    }
+}
+
+// Call-to-Action Button Styles
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
@@ -41,11 +153,12 @@ header {
     transition: background-color 0.3s ease, border 0.3s ease;
 
     &:hover {
-        background-color: #c723a3;
+        background-color: $primary-hover-color;
         border: 3px solid green;
     }
 }
 
+// Section Styles
 section {
     padding: 20px;
     font-size: larger;
@@ -63,7 +176,7 @@ section {
         input {
             color: rgb(177, 248, 10);
             font-size: larger;
-            background: linear-gradient(45deg, #110c1a, #d0e9f4);
+            background: #fff; // Set input background to white
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -75,7 +188,7 @@ section {
         button {
             color: #fff;
             font-size: larger;
-            background: linear-gradient(45deg, #110c1a, #d0e9f4);
+            background-color: $primary_color;
             padding: 10px 20px;
             margin: 10px 5px;
             border: none;
@@ -84,85 +197,383 @@ section {
             transition: background 0.3s ease;
 
             &:hover {
-                background: linear-gradient(45deg, #218838, #28a745);
+                background-color: $primary-hover-color;
             }
         }
     }
 }
 
-footer {
-    background: linear-gradient(45deg, #ff5fe4, #34ce15, #110c1a, #d0e9f4);
-    color: #fff;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+// Chat Section Styles
+.chat-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     width: 100%;
-    text-align: center;
-}
-
-.content {
-    max-width: 800px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 
-    h1 {
-        color: $primary-hover-color;
+    ul#messages {
+        flex: 1;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+
+        // Custom scrollbar
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+
+            &.my-message {
+                background-color: #d1e7dd;
+                align-self: flex-end;
+                text-align: right;
+            }
+
+            &.their-message {
+                background-color: #f8d7da;
+                align-self: flex-start;
+                text-align: left;
+            }
+
+            &:hover {
+                background-color: #f1f1f1;
+            }
+        }
     }
 
-    h4 {
-        color: #666;
-    }
+    .message-input {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #ccc;
 
-    table {
-        width: 100%;
-        margin-top: 20px;
-        border-collapse: collapse;
-
-        th, td {
+        input#message {
+            flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
 
-            th {
-                background-color: #f0f0f0;
-                color: #333;
+        button#send {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, $primary_color, $primary_hover_color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background-color: $primary_hover_color;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+// Footer Styles
+footer {
+    background-color: #333; // Plain color for the footer
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: auto; // Push footer to the bottom
+    position: relative; // Position relative to the parent container
+    left: 0; // Align to the left
+    right: 0;   // Align to the right
+    
+    p {
+        margin: 0;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+}
+
+// Home Page Content Styles
+.home-content {
+    max-width: 70%; // Cover 70% of the screen
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center; // Center the content
+
+    .content-block {
+        display: flex;
+        flex-direction: column; // Stack image and text vertically
+        align-items: center;
+        margin-bottom: 40px;
+
+        img {
+            width: 100%; // Make image the same width as the paragraph
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-content {
+            width: 100%; // Make text content the same width as the image
+
+            h2 {
+                font-size: 1.8em;
+                color: $primary_color;
+                margin-bottom: 10px;
+            }
+
+            p {
+                font-size: 1.2em;
+                color: #000000; // Change text color to white for better contrast
+                line-height: 1.6;
             }
         }
     }
 
-    a {
-        display: inline-block;
-        padding: 8px 16px;
-        margin: 5px;
-        border-radius: 20px;
+    .cta-button {
+        text-align: center;
+        margin-top: 20px;
+
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: $primary_color;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $primary-hover-color;
+            }
+        }
+    }
+}
+
+// Login Content Styles
+.login-content {
+    background-color: #fff; // White background for the form container
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    max-width: 400px;
+    width: 100%;
+    text-align: center; // Center the text
+
+    h2 {
+        font-size: 2em;
+        color: $primary_color;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: #fff; // Set input background to white
+            color: #000; // Set input text color to black
+        }
+
+        button {
+            padding: 10px;
+            background-color: $primary_color;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: $primary-hover-color;
+            }
+        }
+    }
+
+    p {
+        font-size: 1em;
+        color: #333;
+        text-align: center;
+
+        a {
+            color: $primary_color;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 20px;
+
+        li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f8d7da;
+            color: #721c24;
+
+            &.success {
+                background-color: #d4edda;
+                color: #155724;
+            }
+
+            &.info {
+                background-color: #d1ecf1;
+                color: #0c5460;
+            }
+
+            &.warning {
+                background-color: #fff3cd;
+                color: #856404;
+            }
+
+            &.error {
+                background-color: #f8d7da;
+                color: #721c24;
+            }
+        }
+    }
+}
+
+// Success Message Styles
+.success {
+    list-style-type: none; // Remove the dot from the message
+}
+
+// Go Back Home Link Styles
+.go-back-home {
+    margin-top: auto; // Push the link to the bottom
+    text-align: center; // Center the link
+    padding: 20px;
+}
+
+// Reset Password Container Styles
+.reset-password-container {
+    background-color: #fff; // White background for the form container
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    max-width: 400px;
+    width: 100%;
+    text-align: center; // Center the text
+}
+
+// Messages Styles
+.messages {
+    list-style-type: none; // Remove the dot from the message
+    padding: 0; // Remove default padding
+    margin-bottom: 20px; // Add some space below the messages
+
+    li {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        &.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        &.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        &.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        &.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    }
+}
+
+// Styled Form Styles
+.styled-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        width: 100%;
+        max-width: 300px;
+        background-color: #fff; // Set input background to white
+        color: #000; // Set input text color to black
+    }
+
+    button {
+        padding: 10px 20px;
         background-color: $primary_color;
         color: #fff;
-        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
         transition: background-color 0.3s ease;
 
         &:hover {
             background-color: $primary-hover-color;
         }
     }
+}
 
-    input {
-        padding: 10px;
-        margin: 5px;
-        border: solid 1px;
-        border-radius: 5px;
-    }
 
-    #btn_add {
-        background-color: $success-color;
-        color: #fff;
-        cursor: pointer;
-        &:hover {
-            background-color: $success-hover-color;
-        }
+// Button Styles
+.button {
+    background-color: $primary_color;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: $primary-hover-color;
     }
 }

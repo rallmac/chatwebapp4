@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+{% block head %}
     <title>Edit Profile</title>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <h2>Edit Profile</h2>
-    <form method="POST" action="{{ url_for('auth.update_profile') }}" enctype="multipart/form-data">
+    <form class="styled-form" method="POST" action="{{ url_for('auth.update_profile') }}" enctype="multipart/form-data">
         <input type="text" name="username" placeholder="Username" value="{{ current_user.username }}" required><br>
         <input type="text" name="email" placeholder="Email" value="{{ current_user.email }}"><br>
         <input type="number" name="phone_number" placeholder="Phone Number" value="{{ current_user.phone_number }}"><br>
@@ -17,5 +16,4 @@
         {% endif %}
         <button type="submit">Update Profile</button>
     </form>
-</body>
-</html>
+{% endblock %}

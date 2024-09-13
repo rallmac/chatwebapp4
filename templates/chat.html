@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
+    
+{% block head %}
     <title>Chat Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+{% endblock %}
+    
+{% block body %}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const socket = io.connect('http://' + document.domain + ':' + location.port);
@@ -28,27 +27,11 @@
             };
         });
     </script>
-</head>
-<body>
-    <header>
-        <h1>Welcome to the Chat Page</h1>
-        <nav>
-            <a href="{{ url_for('auth.logout') }}" class="button">Logout</a>
-            <a href="{{ url_for('auth.edit_profile') }}" class="button">Edit Profile</a>
-            <a href="{{ url_for('auth.view_users') }}" class="button">View Users</a>
-            <form action="{{ url_for('auth.search') }}" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-        </nav>
-    </header>
-    <section>
+    <section class="chat-section">
         <ul id="messages"></ul>
-        <input id="message" type="text" placeholder="Enter your message">
-        <button id="send">Send</button>
+        <div class="message-input">
+            <input id="message" type="text" placeholder="Enter your message">
+            <button id="send">Send</button>
+        </div>
     </section>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
-</body>
-</html>
+{% endblock %}
