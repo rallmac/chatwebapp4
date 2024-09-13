@@ -1,0 +1,51 @@
+.authors-slide {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 50px; /* Add padding to make space for buttons */
+}
+
+.slide-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.author-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    box-sizing: border-box;
+    height: 100vh; /* Full viewport height */
+}
+
+.author-block img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+.author-bio {
+    width: 50%;
+    text-align: center;
+}
+
+.slide-button {
+    position: absolute;
+    bottom: 10px; /* Position buttons at the bottom */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.slide-button.prev {
+    left: 10px;
+}
+
+.slide-button.next {
+    right: 10px;
+}
