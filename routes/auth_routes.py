@@ -105,7 +105,6 @@ def register():
         new_user = User(username=username, password=hashed_password, email=email, phone_number=phone_number)
         db.session.add(new_user)
         db.session.commit()
-        login_user(new_user)
         flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('auth.login'))
     return render_template('register.html')
