@@ -6,7 +6,8 @@ from socketio_instance import socketio  # Import from socketio_instance.py
 
 chat_bp = Blueprint('chat', __name__)
 
-@chat_bp.route('/')
+
+@chat_bp.route('/chat')
 @login_required
 def chat():
     return render_template('chat.html')

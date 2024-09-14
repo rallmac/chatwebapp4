@@ -35,7 +35,7 @@
         </tbody>
     </table>
     <div class="go-back-home">
-        <a class="button" href="{{ url_for('auth.home') }}">Back to Home</a>
+        <button class="button" onclick="window.location.href='{{ url_for('auth.home') }}'">Back to Home</button>
     </div>
 </div>
 {% endblock %}

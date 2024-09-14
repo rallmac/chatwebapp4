@@ -51,7 +51,7 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(chat_bp, url_prefix='/chat')
 
 @app.route('/')
-def home():
+def index():
     username = current_user.username if current_user.is_authenticated else 'Guest'
     return render_template('index.html', username=username)
 

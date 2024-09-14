@@ -1,4 +1,3 @@
-import os
 from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from models import db, User
@@ -23,8 +22,14 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @auth_bp.route('/')
-def home():
+def index():
     return render_template('index.html')
+
+# this route takes you to home page when you login
+@auth_bp.route('/home')
+@login_required
+def home():
+    return render_template('home.html')
 
 @auth_bp.route('/chat')
 @login_required
@@ -34,7 +39,7 @@ def chat():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('auth.chat'))
+        return redirect(url_for('auth.home'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -42,7 +47,7 @@ def login():
         if user and check_password_hash(user.password, password):
             login_user(user)
             flash('Logged in successfully.', 'success')
-            return redirect(url_for('auth.chat'))
+            return redirect(url_for('auth.home'))
         else:
             flash('Login unsuccessful. Please check your username and password.', 'danger')
     return render_template('login.html')
@@ -133,7 +138,6 @@ def update_profile():
         email = request.form['email']
         phone_number = request.form['phone_number']
         
-
         current_user.username = username
         current_user.email = email
         current_user.phone_number = phone_number
@@ -175,9 +179,12 @@ def view_users():
     users = User.query.all()
     return render_template('view_users.html', users=users)
 
-@auth_bp.route('/search')
+@auth_bp.route('/search', methods=['GET'])
 @login_required
 def search():
-    query = request.args.get('query')
-    # Handle search logic here
-    return render_template('search_results.html', query=query)
+    username = request.args.get('username')
+    if username:
+        users = User.query.filter(User.username.like(f'%{username}%')).all()
+    else:
+        users = User.query.all()
+    return render_template('search_users.html', users=users)
