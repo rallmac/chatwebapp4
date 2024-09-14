@@ -284,7 +284,7 @@ section {
 
         button#send {
             padding: 10px 20px;
-            background: linear-gradient(135deg, $primary_color, $primary_hover_color);
+            background-color: $primary_color;
             color: #fff;
             border: none;
             border-radius: 5px;

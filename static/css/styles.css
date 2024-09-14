@@ -199,7 +199,7 @@ section {
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); }
     .chat-section .message-input button#send {
       padding: 10px 20px;
-      background: linear-gradient(135deg, #071422, #0056b3);
+      background-color: #071422;
       color: #fff;
       border: none;
       border-radius: 5px;
