@@ -45,4 +45,26 @@
 .slide-button.next {
   right: 10px; }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .author-bio {
+    width: 80%; }
+
+  .author-block img {
+    width: 100px;
+    height: 100px; }
+
+  .slide-button {
+    padding: 5px; } }
+@media (max-width: 480px) {
+  .author-bio {
+    width: 90%; }
+
+  .author-block img {
+    width: 80px;
+    height: 80px; }
+
+  .slide-button {
+    padding: 3px; } }
+
 /*# sourceMappingURL=slides_styles.css.map */

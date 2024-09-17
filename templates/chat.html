@@ -6,7 +6,7 @@
     
 {% block body %}
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', (event) => {
             const socket = io.connect('http://' + document.domain + ':' + location.port);
 
             socket.on('connect', () => {
@@ -30,7 +30,7 @@
     <section class="chat-section">
         <ul id="messages"></ul>
         <div class="message-input">
-            <input id="message" class="input"  type="text" placeholder="Enter your message">
+            <input id="message" class="form-control"  type="text" placeholder="Enter your message">
             <button id="send">Send</button>
         </div>
     </section>

@@ -149,7 +149,8 @@ section {
   padding: 20px;
   background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
   border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  height: calc(100vh - 60px - 60px); }
 
 ul#messages {
   flex: 1;
@@ -191,7 +192,10 @@ ul#messages {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-top: 1px solid #ccc; }
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  position: sticky;
+  bottom: 90px; }
   .message-input input#message {
     flex: 1;
     padding: 10px;
@@ -219,10 +223,11 @@ footer {
   text-align: center;
   width: 100%;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: auto;
-  position: relative;
+  position: sticky;
+  bottom: 0;
   left: 0;
-  right: 0; }
+  right: 0;
+  z-index: 1000; }
   footer p {
     margin: 0;
     font-size: 1.2em;
@@ -455,5 +460,24 @@ footer {
 
 .slide-button.next {
   right: 10px; }
+
+@media (max-width: 576px) {
+  .jumbotron h1 {
+    font-size: 2rem; }
+
+  .jumbotron p {
+    font-size: 1rem; } }
+@media (min-width: 577px) and (max-width: 768px) {
+  .jumbotron h1 {
+    font-size: 2.5rem; }
+
+  .jumbotron p {
+    font-size: 1.25rem; } }
+@media (min-width: 769px) {
+  .jumbotron h1 {
+    font-size: 3rem; }
+
+  .jumbotron p {
+    font-size: 1.5rem; } }
 
 /*# sourceMappingURL=styles.css.map */

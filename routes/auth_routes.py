@@ -25,7 +25,7 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
-# this route takes you to home page when you login
+""" this route takes you to home page when you login """
 @auth_bp.route('/home')
 @login_required
 def home():
@@ -153,7 +153,7 @@ def update_profile():
         db.session.commit()
         
         flash('Profile updated successfully.', 'success')
-        return redirect(url_for('auth.chat'))
+        return redirect(url_for('auth.update_profile'))
     
     return render_template('edit_profile.html', user=current_user)
 
