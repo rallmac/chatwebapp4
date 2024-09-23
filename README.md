@@ -18,9 +18,10 @@ This the link to my linked in
 https://www.linkedin.com/in/tobijah-ekperikpe-90a82924i6
 
 Link to author2 linkedin
-
+https://www.linkedin.com/in/jeje
 
 Link to author3 linkedin
+https://www.linkedin.com/in/tadeous
 
 
 For Now there is no related project, but another project is
